@@ -29,10 +29,8 @@ export const getMetares = async (): Promise<InfosMeteorologicas[]> => {
     //     t => t.id_localidade === aeroporto.icao
     // );
     console.log({
-      ...aeroporto,
-      validade_inicial: metar?.validade_inicial ?? '',
-      metar: metar?.mens ?? '',
-      taf: '',
+      API_REDEMET: process.env.API_REDEMET ? 'SET' : 'UNDEFINED',
+      BASE_URL_REDEMET: process.env.BASE_URL_REDEMET ? 'SET' : 'UNDEFINED',
     });
     return {
       ...aeroporto,
