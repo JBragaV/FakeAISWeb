@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: Debug env
         run: |
-          echo "API KEY PRESENT: ${{ secrets.REDEMET_API_KEY != '' }}"
+          echo "API KEY PRESENT: ${{ secrets.API_REDEMET != '' }}"
       - uses: actions/checkout@v2
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
