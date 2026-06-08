@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Instalação das dependências
+        run: npm install
+        
+      - name: Rodar o buld
+        run: npm run build
+        env:
+          API_REDEMET: ${{ secrets.API_REDEMET }}
+          BASE_URL_REDEMET: ${{ vars.BASE_URL_REDEMET }}
+
+
