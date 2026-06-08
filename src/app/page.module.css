@@ -8,4 +8,5 @@
   justify-content: space-between;
   font-family: var(--font-geist-sans);
   background-color: var(--foreground);
+  padding-top: 64px;
 }
