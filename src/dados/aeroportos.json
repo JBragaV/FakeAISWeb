@@ -1,0 +1,56 @@
+[
+  {
+    "icao": "SDCO",
+    "cidade": "Sorocaba",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/sorocaba.jpg"
+  },
+  {
+    "icao": "SBJD",
+    "cidade": "Jundiaí",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/jundiai.jpg"
+  },
+  {
+    "icao": "SDAM",
+    "cidade": "Amarais",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/amarais.jpg"
+  },
+  {
+    "icao": "SBJH",
+    "cidade": "Catarina",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/catarina.jpg"
+  },
+  {
+    "icao": "SBSP",
+    "cidade": "São Paulo/Congonhas",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/congonhas.jpg"
+  },
+  {
+    "icao": "SBGR",
+    "cidade": "Guarulhos",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/guarulhos.jpg"
+  }
+]

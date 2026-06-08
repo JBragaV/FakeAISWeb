@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AISWebFake
+
+Projeto onde simulo de forma bem resumeida a AISWeb e a REDEMET para estudo do React/Next.
+
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, please follow these simple steps.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Built With
+
+- Node.js (v20+)
+- Next.js 16.2.6
+- React 19.2.4
+- Axios 1.16.1
+- Prettier 3.8.3
+- Jest 30.4.2
+- Testing Library 16.3.2
+
+### Prerequisites
+
+- Node.js (Version: >=18.x)
+- Next.js
+- Axios 1.16.1
+
+Esteira CI/CD (Deploy na Vercel)
 ```
+YAML
+name: CI/CD Versel Deploy
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+jobs:
+  # ---------------------------------------------------------
+  # ETAPA 1: Integração Contínua (CI)
+  # ---------------------------------------------------------
+  ci:
+    name: Build & Test
+    runs-on: ubuntu-latest
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-## Learn More
+      - name: Configurar Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-To learn more about Next.js, take a look at the following resources:
+      - name: Instalar dependências
+        run: npm ci
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+      - name: Rodar Lint
+        run: npm run lint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+      - name: Rodar Testes
+        run: npm run test
 
-## Deploy on Vercel
+      - name: Rodar Build
+        # Injeta variáveis de ambiente fakes caso o Next.js exija na hora do build
+        env:
+          NEXT_PUBLIC_API_URL: https://api.redemet.aer.mil.br
+          REDEMET_API_KEY: dummy_key_for_build
+        run: npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  # ---------------------------------------------------------
+  # ETAPA 2: Deploy Automatizado (CD) - Apenas Push na Main
+  # ---------------------------------------------------------
+  cd:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs: ci # Garante que o deploy só ocorre se o CI passar
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Deploy para Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+```

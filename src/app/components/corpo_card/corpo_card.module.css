@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  border-top: calc(var(--space-1) / 8) solid wheat;
+  flex: 1;
+}
+
+.container__paragrafo {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  color: inherit;
+}
+
+.visual {
+  background-color: var(--visual-green);
+  color: #f5f5f5;
+}
+
+.mvfr {
+  background-color: var(--visual-green);
+  color: var(--text-primary);
+}
+
+.ifr {
+  background-color: var(--visual-green);
+  color: var(--text-primary);
+}
