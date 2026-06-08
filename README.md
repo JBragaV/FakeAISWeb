@@ -1,4 +1,4 @@
-# AISWebFake
+# [AISWebFake] (https://fake-ais-web-w2bo.vercel.app/)
 
 Projeto onde simulo de forma bem resumeida a AISWeb e a REDEMET para estudo do React/Next.
 
@@ -26,25 +26,79 @@ To get a local copy up and running, please follow these simple steps.
 Esteira CI/CD (Deploy na Vercel)
 ```
 YAML
-name: CI/CD Versel Deploy
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "src/**"
+      - ".github/workflows/**"
   pull_request:
     branches:
       - main
-
+    paths:
+      - "src/**"
+      - ".github/workflows/**"
+  workflow_dispatch:
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  API_REDEMET: ${{ secrets.API_REDEMET }}
+  BASE_URL_REDEMET: ${{ vars.BASE_URL_REDEMET }}
 jobs:
-  # ---------------------------------------------------------
-  # ETAPA 1: Integração Contínua (CI)
-  # ---------------------------------------------------------
-  ci:
-    name: Build & Test
+  tests:
     runs-on: ubuntu-latest
-
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache-dependency-path: package-lock.json
+        
+      - name: Instalação das dependências
+        run: npm install
+      
+      - name: Rodaando o Lint
+        run: npm run lint
+
+      - name: Verificando formatação
+        run: npm run format
+
+      - name: Testando
+        run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache-dependency-path: package-lock.json
+        
+      - name: Instalação das dependências
+        run: npm install
+        
+      - name: Rodar o buld
+        run: npm run build
+
+  deploy:
+    name: Vercel Production Deployment
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug env
+        run: |
+          echo "API KEY PRESENT: ${{ secrets.API_REDEMET != '' }}" | echo "API KEY PRESENT: ${{ secrets.BASE_URL_REDEMET != '' }}"
+      
       - name: Checkout do código
         uses: actions/checkout@v4
 
@@ -54,40 +108,9 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Instalar dependências
-        run: npm ci
-
-      - name: Rodar Lint
-        run: npm run lint
-
-      - name: Rodar Testes
-        run: npm run test
-
-      - name: Rodar Build
-        # Injeta variáveis de ambiente fakes caso o Next.js exija na hora do build
-        env:
-          NEXT_PUBLIC_API_URL: https://api.redemet.aer.mil.br
-          REDEMET_API_KEY: dummy_key_for_build
-        run: npm run build
-
-  # ---------------------------------------------------------
-  # ETAPA 2: Deploy Automatizado (CD) - Apenas Push na Main
-  # ---------------------------------------------------------
-  cd:
-    name: Deploy to Vercel
-    runs-on: ubuntu-latest
-    needs: ci # Garante que o deploy só ocorre se o CI passar
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
-
-      - name: Deploy para Vercel
-        uses: amondnet/vercel-action@v20
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
 ```
