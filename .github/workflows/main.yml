@@ -7,12 +7,22 @@ on:
     paths:
       - "src/**"
       - ".github/workflows/**"
+      - "public/**"
+      - ".github/workflows/**"
+      - "package.json"
+      - "package-lock.json"
+      - "*.config.*"
   pull_request:
     branches:
       - main
     paths:
       - "src/**"
       - ".github/workflows/**"
+      - "public/**"
+      - ".github/workflows/**"
+      - "package.json"
+      - "package-lock.json"
+      - "*.config.*"
   workflow_dispatch:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -33,13 +43,12 @@ jobs:
           cache-dependency-path: package-lock.json
         
       - name: Instalação das dependências
-        run: npm install
+        run: npm ci
       
-      - name: Rodaando o Lint
-        run: npm run lint
-
-      - name: Verificando formatação
-        run: npm run format
+      - name: Rodando o Lint e formatando
+        run: |
+          npm run lint
+          npm run format
 
       - name: Testando
         run: npm run test
