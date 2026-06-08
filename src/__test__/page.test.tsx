@@ -23,7 +23,7 @@ describe('Teste do Card', () => {
 
     (getMetares as jest.Mock).mockResolvedValue(resposta);
 
-    const page = await Metar()
+    const page = await Metar();
     render(page);
 
     expect(getMetares).toHaveBeenCalledTimes(1);

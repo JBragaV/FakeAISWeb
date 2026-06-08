@@ -2,7 +2,6 @@
 
 Projeto onde simulo de forma bem resumeida a AISWeb e a REDEMET para estudo do React/Next.
 
-
 ## Getting Started
 
 To get a local copy up and running, please follow these simple steps.
@@ -24,6 +23,7 @@ To get a local copy up and running, please follow these simple steps.
 - Axios 1.16.1
 
 Esteira CI/CD (Deploy na Vercel)
+
 ```
 YAML
 name: CI/CD Pipeline
@@ -59,10 +59,10 @@ jobs:
         with:
           node-version: '20'
           cache-dependency-path: package-lock.json
-        
+
       - name: Instalação das dependências
         run: npm install
-      
+
       - name: Rodaando o Lint
         run: npm run lint
 
@@ -83,10 +83,10 @@ jobs:
         with:
           node-version: '20'
           cache-dependency-path: package-lock.json
-        
+
       - name: Instalação das dependências
         run: npm install
-        
+
       - name: Rodar o buld
         run: npm run build
 
@@ -98,7 +98,7 @@ jobs:
       - name: Debug env
         run: |
           echo "API KEY PRESENT: ${{ secrets.API_REDEMET != '' }}" | echo "API KEY PRESENT: ${{ secrets.BASE_URL_REDEMET != '' }}"
-      
+
       - name: Checkout do código
         uses: actions/checkout@v4
 
@@ -110,7 +110,7 @@ jobs:
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-      
+
       - name: Deploy Project Artifacts to Vercel
         run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
 ```

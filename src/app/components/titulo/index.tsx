@@ -1,4 +1,4 @@
-import style from './titulo.module.css'
+import style from './titulo.module.css';
 
 type props = {
   titulo: string;
@@ -6,5 +6,7 @@ type props = {
 };
 
 export default function Titulo({ titulo, caixa }: props) {
-  return <h2 className={style.titulos}>{caixa ? titulo.toUpperCase() : titulo}</h2>;
+  return (
+    <h2 className={style.titulos}>{caixa ? titulo.toUpperCase() : titulo}</h2>
+  );
 }

@@ -4,7 +4,7 @@ import Metar from './metar/page';
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Metar/>
+      <Metar />
     </main>
   );
 }

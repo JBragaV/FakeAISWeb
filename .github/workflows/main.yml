@@ -5,24 +5,24 @@ on:
     branches:
       - main
     paths:
-      - "src/**"
-      - ".github/workflows/**"
-      - "public/**"
-      - ".github/workflows/**"
-      - "package.json"
-      - "package-lock.json"
-      - "*.config.*"
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'public/**'
+      - '.github/workflows/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '*.config.*'
   pull_request:
     branches:
       - main
     paths:
-      - "src/**"
-      - ".github/workflows/**"
-      - "public/**"
-      - ".github/workflows/**"
-      - "package.json"
-      - "package-lock.json"
-      - "*.config.*"
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'public/**'
+      - '.github/workflows/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '*.config.*'
   workflow_dispatch:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -41,10 +41,10 @@ jobs:
         with:
           node-version: '20'
           cache-dependency-path: package-lock.json
-        
+
       - name: Instalação das dependências
         run: npm ci
-      
+
       - name: Rodando o Lint e formatando
         run: |
           npm run lint
@@ -64,10 +64,10 @@ jobs:
         with:
           node-version: '20'
           cache-dependency-path: package-lock.json
-        
+
       - name: Instalação das dependências
         run: npm install
-        
+
       - name: Rodar o buld
         run: npm run build
 
@@ -79,7 +79,7 @@ jobs:
       - name: Debug env
         run: |
           echo "API KEY PRESENT: ${{ secrets.API_REDEMET != '' }}" | echo "API KEY PRESENT: ${{ secrets.BASE_URL_REDEMET != '' }}"
-      
+
       - name: Checkout do código
         uses: actions/checkout@v4
 
@@ -91,6 +91,6 @@ jobs:
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-      
+
       - name: Deploy Project Artifacts to Vercel
         run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}

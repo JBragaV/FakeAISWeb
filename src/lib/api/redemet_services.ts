@@ -39,7 +39,7 @@ export const getMetares = async (): Promise<InfosMeteorologicas[]> => {
       taf: '',
     };
   });
-  return resultado
+  return resultado;
 };
 
 export const metarSDCO = async () => {

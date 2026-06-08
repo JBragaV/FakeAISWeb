@@ -3,19 +3,19 @@
    ───────────────────────────────────────────── */
 :root {
   /* Cores */
---background: #F4F3EF;        /* Nuvem clara — fundo do corpo */
---foreground: #ffffff;        /* Cards e superfícies elevadas */
+  --background: #f4f3ef; /* Nuvem clara — fundo do corpo */
+  --foreground: #ffffff; /* Cards e superfícies elevadas */
 
---text-primary: #0B2545;      /* Céu noturno — títulos e texto principal */
---text-secondary: #5F5E5A;    /* Concreto de pista — texto secundário */
+  --text-primary: #0b2545; /* Céu noturno — títulos e texto principal */
+  --text-secondary: #5f5e5a; /* Concreto de pista — texto secundário */
 
---button-primary-hover: #185FA5;   /* Azul radar escuro — hover do botão primário */
---button-secondary-hover: #E6F1FB; /* Névoa — hover sutil do botão secundário */
---button-secondary-border: #B5D4F4; /* Azul claro — borda do botão secundário */
+  --button-primary-hover: #185fa5; /* Azul radar escuro — hover do botão primário */
+  --button-secondary-hover: #e6f1fb; /* Névoa — hover sutil do botão secundário */
+  --button-secondary-border: #b5d4f4; /* Azul claro — borda do botão secundário */
 
-  --visual-green: #1D9E75;
-  --mvfr-yellow: #EF9F27;
-  --ifr-red: #E24B4A;
+  --visual-green: #1d9e75;
+  --mvfr-yellow: #ef9f27;
+  --ifr-red: #e24b4a;
 
   /* Tipografia */
   --font-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
@@ -74,7 +74,6 @@
   --max-width-lg: 1024px;
   --max-width-xl: 1280px;
   --max-width-2xl: 1440px;
-
 }
 
 /* ─────────────────────────────────────────────
@@ -234,7 +233,6 @@ p {
     border-color: transparent;
   }
 }
-
 
 /* ─────────────────────────────────────────────
    7. LAYOUT HELPERS (Mobile-First)

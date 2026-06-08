@@ -17,7 +17,9 @@ export default function BodyCard({ metar, taf }: props) {
       </div>
       <hr />
       <div>
-        <p className={style.container__paragrafo}>{taf ? taf : 'Em desenvolvimento o TAF'}</p>
+        <p className={style.container__paragrafo}>
+          {taf ? taf : 'Em desenvolvimento o TAF'}
+        </p>
       </div>
     </div>
   );

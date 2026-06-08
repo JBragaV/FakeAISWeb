@@ -11,12 +11,12 @@ export default async function Metar() {
 
   return (
     <>
-    <Header/>
+      <Header />
       <h2 className={style.titulo_pagina_metar}>Metar das Proximidades</h2>
       <section className={style.grid_metar}>
-          {metares.map((localidade) => (
-            <CardLocalidade key={localidade.icao} meteorologia={localidade} />
-          ))}
+        {metares.map((localidade) => (
+          <CardLocalidade key={localidade.icao} meteorologia={localidade} />
+        ))}
       </section>
     </>
   );
