@@ -55,7 +55,7 @@ jobs:
         run: npm run lint
 
       - name: Verificando formatação
-        run: run run format
+        run: npm run format
 
       - name: Testando
         run: npm run test
