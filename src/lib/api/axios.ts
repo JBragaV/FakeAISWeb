@@ -1,16 +1,14 @@
 import axios from 'axios';
 
-
 const getEnvBase = () => {
-  
   const baseUrl = process.env.BASE_URL_REDEMET;
 
   if (!baseUrl) {
-    throw new Error("BASE_URL_REDEMET não configurada");
+    throw new Error('BASE_URL_REDEMET não configurada');
   }
 
-  return baseUrl
-}
+  return baseUrl;
+};
 
 const redeMetApi = axios.create({
   baseURL: getEnvBase(),
@@ -20,6 +18,3 @@ const redeMetApi = axios.create({
 });
 
 export default redeMetApi;
-
-
-
