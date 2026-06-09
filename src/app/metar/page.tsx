@@ -1,6 +1,5 @@
 import { getMetares } from '@/lib/api/redemet_services';
 import type { InfosMeteorologicas } from '@/types/meteorologia';
-import Titulo from '../components/titulo';
 import CardLocalidade from '../components/card';
 
 import style from './metar.module.css';
