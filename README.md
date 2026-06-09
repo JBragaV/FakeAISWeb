@@ -33,14 +33,22 @@ on:
     branches:
       - main
     paths:
-      - "src/**"
-      - ".github/workflows/**"
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '*.config.*'
   pull_request:
     branches:
       - main
     paths:
-      - "src/**"
-      - ".github/workflows/**"
+      - 'src/**'
+      - '.github/workflows/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '*.config.*'
   workflow_dispatch:
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -58,16 +66,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
           cache-dependency-path: package-lock.json
 
       - name: Instalação das dependências
-        run: npm install
+        run: npm ci
 
-      - name: Rodaando o Lint
-        run: npm run lint
-
-      - name: Verificando formatação
-        run: npm run format
+      - name: Rodando o Lint e formatando
+        run: |
+          npm run lint
+          npm run check
 
       - name: Testando
         run: npm run test
@@ -82,10 +90,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
           cache-dependency-path: package-lock.json
 
       - name: Instalação das dependências
-        run: npm install
+        run: npm ci
 
       - name: Rodar o buld
         run: npm run build
@@ -94,10 +103,12 @@ jobs:
     name: Vercel Production Deployment
     needs: build
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Debug env
         run: |
-          echo "API KEY PRESENT: ${{ secrets.API_REDEMET != '' }}" | echo "API KEY PRESENT: ${{ secrets.BASE_URL_REDEMET != '' }}"
+          echo "API_REDEMET=${{ secrets.API_REDEMET != '' }}"
+          echo "BASE_URL_REDEMET=${{ vars.BASE_URL_REDEMET != '' }}"
 
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -106,11 +117,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
 ```

@@ -11,13 +11,23 @@ type data = {
   };
 };
 
+const getKey = () => {
+  const apiKey = process.env.API_REDEMET;
+  if (!apiKey) {
+    throw new Error("API_REDEMET não configurada");
+  }
+
+  return apiKey;
+}
+
 export const getMetares = async (): Promise<InfosMeteorologicas[]> => {
+  const api_key = getKey();
   const jsonLocalidade = aeroportos;
 
-  const icaos = aeroportos.map((localidade) => localidade.icao).join(',');
 
+  const icaos = aeroportos.map((localidade) => localidade.icao).join(',');
   const res = await redeMetApi.get<data>(
-    `/mensagens/metar/${icaos}?api_key=${process.env.API_REDEMET}`,
+    `/mensagens/metar/${icaos}?api_key=${api_key}`,
   );
 
   const resposta = res.data.data.data;
