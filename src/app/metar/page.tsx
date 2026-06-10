@@ -5,8 +5,6 @@ import CardLocalidade from '../components/card';
 import style from './metar.module.css';
 import Header from '../components/header';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Metar() {
   const metares: InfosMeteorologicas[] = await getMetares();
 
@@ -15,9 +13,15 @@ export default async function Metar() {
       <Header />
       <h2 className={style.titulo_pagina_metar}>Metar das Proximidades</h2>
       <section className={style.grid_metar}>
-        {metares.map((localidade) => (
-          <CardLocalidade key={localidade.icao} meteorologia={localidade} />
-        ))}
+        {metares.map((localidade, i) => {
+          return (
+            <CardLocalidade
+              key={localidade.icao}
+              meteorologia={localidade}
+              prioridade={i === 0}
+            />
+          );
+        })}
       </section>
     </>
   );

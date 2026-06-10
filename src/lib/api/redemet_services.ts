@@ -37,10 +37,6 @@ export const getMetares = async (): Promise<InfosMeteorologicas[]> => {
     // const taf = tafs.find(
     //     t => t.id_localidade === aeroporto.icao
     // );
-    console.log({
-      API_REDEMET: process.env.API_REDEMET ? 'SET' : 'UNDEFINED',
-      BASE_URL_REDEMET: process.env.BASE_URL_REDEMET ? 'SET' : 'UNDEFINED',
-    });
     return {
       ...aeroporto,
       validade_inicial: metar?.validade_inicial ?? '',

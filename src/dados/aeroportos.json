@@ -6,7 +6,16 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/sorocaba.jpg"
+    "foto": "/aeroportos/sorocaba.avif"
+  },
+  {
+    "icao": "SBMT",
+    "cidade": "São Paulo/Marte",
+    "uf": "SP",
+    "metar": "",
+    "taf": "",
+    "validade_inicial": "",
+    "foto": "/aeroportos/marte.avif"
   },
   {
     "icao": "SBJD",
@@ -15,7 +24,7 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/jundiai.jpg"
+    "foto": "/aeroportos/jundiai.avif"
   },
   {
     "icao": "SDAM",
@@ -24,7 +33,7 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/amarais.jpg"
+    "foto": "/aeroportos/amarais.avif"
   },
   {
     "icao": "SBJH",
@@ -33,7 +42,7 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/catarina.jpg"
+    "foto": "/aeroportos/catarina.avif"
   },
   {
     "icao": "SBSP",
@@ -42,7 +51,7 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/congonhas.jpg"
+    "foto": "/aeroportos/congonhas.avif"
   },
   {
     "icao": "SBGR",
@@ -51,6 +60,6 @@
     "metar": "",
     "taf": "",
     "validade_inicial": "",
-    "foto": "/aeroportos/guarulhos.jpg"
+    "foto": "/aeroportos/guarulhos.avif"
   }
 ]
