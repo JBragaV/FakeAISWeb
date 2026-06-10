@@ -14,5 +14,8 @@ const config: Config = {
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
 
+process.env.BASE_URL_REDEMET = 'https://teste.com';
+process.env.API_REDEMET = 'chavetestejest';
+
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 export default createJestConfig(config);
